@@ -1,0 +1,3162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodwin Traders & Transport | Premium Rice Trading</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    :root {
+      --primary: #2E7D32;
+      --primary-dark: #1B5E20;
+      --primary-light: #4CAF50;
+      --secondary: #FFC107;
+      --accent: #8D6E63;
+      --light: #F5F5F5;
+      --dark: #333333;
+      --white: #FFFFFF;
+      --success: #25D366;
+      --danger: #DC3545;
+      --warning: #FF9800;
+      --info: #2196F3;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --radius: 8px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary { background: var(--primary); color: var(--white); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn-success { background: var(--success); color: var(--white); }
+    .btn-success:hover { background: #128C7E; transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn-secondary { background: var(--secondary); color: var(--dark); }
+    .btn-secondary:hover { background: #FFB300; transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn-danger { background: var(--danger); color: var(--white); }
+    .btn-danger:hover { background: #C82333; }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: rgba(46, 125, 50, 0.1); }
+    .btn-warning { background: var(--warning); color: var(--white); }
+    .btn-warning:hover { background: #e68900; }
+
+    .text-primary { color: var(--primary); }
+    .w-100 { width: 100%; }
+
+    .text-center { text-align: center; }
+    .mb-1 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 2rem; }
+    .mb-3 { margin-bottom: 3rem; }
+    .mt-2 { margin-top: 2rem; }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: var(--white);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: var(--secondary);
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      margin-bottom: 2px;
+    }
+
+    .logo-text p {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-link {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--secondary);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    .cart-badge {
+      background: var(--secondary);
+      color: var(--dark);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 5px;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.9)), 
+                  url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #555;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .product-image {
+      height: 180px;
+      background: #F0F0F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 3rem;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-content {
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    .product-meta {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .bag-sizes {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .bag-size {
+      padding: 6px 12px;
+      background: var(--light);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .bag-size:hover { background: #E0E0E0; }
+    .bag-size.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+    .cart-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-top: 20px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .cart-empty i {
+      font-size: 4rem;
+      color: #DDD;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #EEE;
+      gap: 15px;
+    }
+
+    .cart-item:last-child { border-bottom: none; }
+
+    .cart-item-info h4 { margin-bottom: 5px; }
+    .cart-item-details { color: #666; font-size: 0.9rem; }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--primary-light);
+      background: var(--white);
+      color: var(--primary);
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-btn:hover { background: rgba(76, 175, 80, 0.1); }
+    .cart-item-price { font-weight: 700; color: var(--primary); }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid var(--primary-light);
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .cart-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .cart-actions .btn { flex: 1; }
+
+    .checkout-form {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: var(--radius);
+      border: 1px solid #eee;
+    }
+
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: var(--dark); }
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #DDD;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    }
+
+    .required { color: var(--danger); }
+
+    .admin-container {
+      min-height: 100vh;
+      background: var(--light);
+    }
+
+    .admin-login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 30px;
+    }
+
+    .alert {
+      padding: 12px 15px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert-danger { background: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
+    .alert-success { background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+
+    .admin-dashboard { padding: 20px; }
+
+    .admin-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 20px;
+      border-radius: var(--radius);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      padding: 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .stat-title {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .admin-table-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .admin-table th,
+    .admin-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #EEE;
+    }
+
+    .admin-table th {
+      background: rgba(46, 125, 50, 0.1);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .admin-table tr:hover { background: rgba(46, 125, 50, 0.05); }
+
+    .status-badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-pending { background: #FFF3CD; color: #856404; }
+    .status-processing { background: #CCE5FF; color: #004085; }
+    .status-completed { background: #E8F5E9; color: var(--primary); }
+    .status-cancelled { background: #F8D7DA; color: #721C24; }
+    .status-low { background: #FFF3CD; color: #856404; }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-sm { padding: 6px 12px; font-size: 0.9rem; }
+
+    .order-details-modal .modal-content { max-width: 800px; }
+
+    .order-summary {
+      background: #f9f9f9;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .order-items { margin: 20px 0; }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-item:last-child { border-bottom: none; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid #EEE;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body { padding: 20px; }
+    .modal-footer {
+      padding: 20px;
+      border-top: 1px solid #EEE;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .image-upload-container { margin: 20px 0; }
+
+    .image-preview {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-top: 10px;
+      border: 2px dashed #ddd;
+      padding: 10px;
+      display: none;
+    }
+
+    .upload-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary-light);
+      color: white;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .upload-btn:hover { background: var(--primary); }
+
+    .export-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: var(--primary-dark);
+      color: var(--white);
+      padding: 40px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-section h3 {
+      color: var(--secondary);
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .footer-section p {
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li { margin-bottom: 10px; }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a:hover { color: var(--secondary); padding-left: 5px; }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .tab-nav {
+      display: flex;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 15px 20px;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover { background: #f5f5f5; }
+    .tab-btn.active { background: var(--primary); color: white; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .bulk-actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+
+    .select-all {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 15px;
+      background: #f8f9fa;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    /* ===== MOBILE RESPONSIVE IMPROVEMENTS ===== */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+      }
+      
+      .logo-text h1 {
+        font-size: 1.2rem;
+      }
+      
+      .logo-text p {
+        font-size: 0.7rem;
+      }
+      
+      nav {
+        flex-direction: column;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        padding: 20px;
+        display: none;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 999;
+      }
+      
+      nav.active {
+        display: flex;
+      }
+      
+      .mobile-menu-btn { 
+        display: block; 
+        padding: 10px;
+      }
+      
+      .nav-link {
+        justify-content: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      .nav-link:last-child {
+        border-bottom: none;
+      }
+      
+      .hero {
+        padding: 60px 0;
+      }
+      
+      .hero h1 { 
+        font-size: 2rem; 
+        margin-bottom: 15px;
+      }
+      
+      .hero p { 
+        font-size: 1rem; 
+        padding: 0 10px; 
+        margin-bottom: 25px;
+      }
+      
+      .hero-buttons { 
+        flex-direction: column; 
+        gap: 15px;
+      }
+      
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .products-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      
+      .product-card {
+        padding: 20px;
+      }
+      
+      .product-card h3 {
+        font-size: 1.1rem;
+      }
+      
+      .cart-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+        padding: 15px;
+      }
+      
+      .cart-item-quantity { 
+        justify-content: center; 
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .cart-actions { 
+        flex-direction: column; 
+        gap: 15px;
+      }
+      
+      .action-buttons { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 10px;
+      }
+      
+      .form-row { 
+        grid-template-columns: 1fr; 
+        gap: 15px;
+      }
+      
+      .bulk-actions { 
+        flex-direction: column; 
+        gap: 10px;
+      }
+      
+      .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-size: 0.9rem;
+      }
+      
+      .admin-table th,
+      .admin-table td {
+        padding: 8px 12px;
+        min-width: 100px;
+      }
+      
+      .modal-content {
+        margin: 10px;
+        max-height: 80vh;
+        max-width: 95vw;
+      }
+      
+      .modal-body {
+        padding: 15px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .footer-links a {
+        justify-content: center;
+        padding: 8px 0;
+      }
+      
+      .dashboard-stats {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+      
+      .stat-card {
+        padding: 15px;
+      }
+      
+      .stat-card h3 {
+        font-size: 1.5rem;
+      }
+      
+      section {
+        padding: 40px 0;
+      }
+      
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        min-height: 44px; /* iOS touch target minimum */
+      }
+      
+      .nav-link {
+        padding: 14px 0;
+        min-height: 44px;
+      }
+      
+      .product-card .btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+      
+      /* Improve form inputs for mobile */
+      .form-control {
+        padding: 12px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      /* Better spacing for mobile forms */
+      .form-group {
+        margin-bottom: 15px;
+      }
+      
+      .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+      
+      .order-item > div:last-child {
+        text-align: left;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 10px;
+      }
+      
+      .logo-icon {
+        font-size: 1.5rem;
+      }
+      
+      .logo-text h1 {
+        font-size: 1rem;
+      }
+      
+      .logo-text p {
+        font-size: 0.6rem;
+      }
+      
+      .products-grid { 
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .product-card {
+        padding: 15px;
+      }
+      
+      .product-card h3 {
+        font-size: 1rem;
+      }
+      
+      .product-card .btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+      
+      .dashboard-stats { 
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .stat-card {
+        padding: 12px;
+        text-align: center;
+      }
+      
+      .stat-card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .stat-card p {
+        font-size: 0.8rem;
+      }
+      
+      .modal-content { 
+        max-width: 100%;
+        margin: 5px;
+      }
+      
+      .modal-header h2 {
+        font-size: 1.2rem;
+      }
+      
+      .cart-total {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      
+      .cart-total h3 {
+        font-size: 1.3rem;
+      }
+      
+      .cart-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+      }
+      
+      .modal-footer {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+      
+      .modal-footer .btn {
+        margin-bottom: 5px;
+        flex: 1;
+        min-width: 120px;
+        font-size: 0.85rem;
+      }
+      
+      .export-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .export-buttons .btn {
+        width: 100%;
+        padding: 12px;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero p {
+        font-size: 0.9rem;
+      }
+      
+      .hero-buttons .btn {
+        max-width: 100%;
+      }
+      
+      .admin-form .form-group {
+        margin-bottom: 15px;
+      }
+      
+      input[type="number"] {
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+      
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      
+      /* Modal improvements for mobile */
+      .modal-content {
+        width: 95vw;
+        max-width: 95vw;
+        margin: 5px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      
+      .modal-header {
+        padding: 15px;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .modal-body {
+        padding: 15px;
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+      
+      .modal-footer {
+        padding: 15px;
+        position: sticky;
+        bottom: 0;
+        background: white;
+        border-top: 1px solid #eee;
+        gap: 10px;
+      }
+      
+      /* Better cart layout for mobile */
+      .cart-item {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+      
+      /* Status badges */
+      .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      
+      /* Notification positioning for mobile */
+      .notification {
+        position: fixed;
+        top: 20px;
+        left: 5px;
+        right: 5px;
+        max-width: none;
+        z-index: 10000;
+      }
+      
+      .order-details {
+        font-size: 0.9rem;
+      }
+      
+      .order-item {
+        padding: 12px;
+        font-size: 0.85rem;
+      }
+      
+      .status-badge {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+      }
+      
+      .notification {
+        max-width: 90vw;
+        font-size: 0.9rem;
+      }
+    }
+
+    .hidden { display: none !important; }
+    .visible { display: block; }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+  </style>
+</head>
+<body>
+  <!-- Main Website -->
+  <div id="website">
+    <!-- Header -->
+    <header>
+      <div class="container header-content">
+        <div class="logo">
+          <div class="logo-icon"><i class="fas fa-seedling"></i></div>
+          <div class="logo-text">
+            <h1>Goodwin Traders & Transport</h1>
+            <p>Premium Rice Trading & Logistics</p>
+          </div>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        
+        <nav id="navLinks">
+          <a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+          <a href="#" class="nav-link" data-section="products"><i class="fas fa-shopping-bag"></i> Products</a>
+          <a href="#" class="nav-link" data-section="cart">
+            <i class="fas fa-shopping-cart"></i> Cart <span class="cart-badge" id="cartBadge">0</span>
+          </a>
+          <a href="#" class="nav-link" id="adminLoginBtn"><i class="fas fa-user-shield"></i> Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section active fade-in">
+      <div class="hero">
+        <div class="container">
+          <h1>Premium Quality Rice for Every Table</h1>
+          <p>Experience the finest selection of rice varieties, sourced directly from trusted farmers.</p>
+          <div class="hero-buttons">
+            <a href="#" class="btn btn-primary" data-section="products"><i class="fas fa-shopping-bag"></i> Order Now</a>
+            <a href="#" class="btn btn-secondary" data-section="contact"><i class="fas fa-phone"></i> Contact Us</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="section-title">
+          <h2>Why Choose Us</h2>
+          <p>Committed to excellence in every grain</p>
+        </div>
+        
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image" style="background: #E8F5E9; color: #2E7D32;"><i class="fas fa-award"></i></div>
+            <div class="product-content">
+              <h3 class="product-title">Premium Quality</h3>
+              <p class="product-meta">Carefully selected rice for exceptional taste</p>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image" style="background: #FFF8E1; color: #FF8F00;"><i class="fas fa-tags"></i></div>
+            <div class="product-content">
+              <h3 class="product-title">Competitive Pricing</h3>
+              <p class="product-meta">Best value with wholesale pricing</p>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image" style="background: #E3F2FD; color: #1565C0;"><i class="fas fa-truck"></i></div>
+            <div class="product-content">
+              <h3 class="product-title">Reliable Transport</h3>
+              <p class="product-meta">Timely delivery across the region</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section fade-in">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Premium Rice Collection</h2>
+          <p>Available in multiple bag sizes to suit your needs</p>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" class="section fade-in">
+      <div class="container">
+        <div class="section-title">
+          <h2>Your Shopping Cart</h2>
+          <p>Review your order and provide delivery details</p>
+        </div>
+        <div class="cart-container">
+          <div id="cartContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p>Get in touch for orders and inquiries</p>
+        </div>
+        
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-content">
+              <h3 class="product-title">Contact Information</h3>
+              <p class="mb-2"><i class="fas fa-phone text-primary"></i> +94 76 918 7574</p>
+              <p class="mb-2"><i class="fas fa-envelope text-primary"></i> jabeerbm1@gmail.com</p>
+              <p class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i> Oddamavadi, Sri Lanka</p>
+              <a href="https://wa.me/+94720516946" class="btn btn-success w-100" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Goodwin Traders</h3>
+            <p>Your trusted partner for premium rice and reliable transport services since 2010.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#" data-section="home"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="#" data-section="products"><i class="fas fa-chevron-right"></i> Products</a></li>
+              <li><a href="#" data-section="cart"><i class="fas fa-chevron-right"></i> Cart</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-phone"></i> +94 76 918 7574</p>
+            <p><i class="fas fa-envelope"></i> jabeerbm1@gmail.com</p>
+            <p><i class="fas fa-clock"></i> Mon-Sat: 8AM-8PM</p>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2026 Goodwin Traders & Transport. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Admin System -->
+  <div id="admin" class="admin-container hidden">
+    <!-- Admin Login -->
+    <div id="adminLogin" class="admin-login">
+      <div class="login-box">
+        <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+          <div class="logo-icon"><i class="fas fa-seedling"></i></div>
+          <div class="logo-text"><h1>Admin Portal</h1></div>
+        </div>
+        
+        <h2>Admin Login</h2>
+        
+        <div class="alert alert-danger" id="loginError">
+          <i class="fas fa-exclamation-triangle"></i> Invalid username or password
+        </div>
+        
+        <form id="loginForm">
+          <div class="form-group">
+            <input type="text" class="form-control" id="username" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" placeholder="Password" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+        </form>
+        
+        <p class="mt-2" style="color: #666; font-size: 0.9rem;">
+          <i class="fas fa-info-circle"></i> Default: admin / password123
+        </p>
+        
+        <button class="btn btn-outline mt-2" id="backToWebsite" style="width: 100%;">
+          <i class="fas fa-arrow-left"></i> Back to Website
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden">
+      <div class="admin-header">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <p>Welcome back, Admin</p>
+        </div>
+        <div>
+          <button class="btn btn-secondary" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </div>
+      
+      <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+          <button class="tab-btn" data-tab="orders">Orders</button>
+          <button class="tab-btn" data-tab="products">Products</button>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div id="dashboardTab" class="tab-content active">
+          <!-- Dashboard Stats -->
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-number" id="totalProducts">0</div>
+              <div class="stat-title">Total Products</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="totalSales">Rs. 0</div>
+              <div class="stat-title">Total Sales</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="pendingOrders">0</div>
+              <div class="stat-title">Pending Orders</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="totalOrders">0</div>
+              <div class="stat-title">Total Orders</div>
+            </div>
+          </div>
+          
+          <!-- Export Buttons -->
+          <div class="admin-table-container mb-3">
+            <div style="padding: 20px;">
+              <h3>Export Data</h3>
+              <div class="export-buttons">
+                <button class="btn btn-success" id="exportCsvBtn"><i class="fas fa-file-csv"></i> Export Products CSV</button>
+                <button class="btn btn-danger" id="exportPdfBtn"><i class="fas fa-file-pdf"></i> Export Products PDF</button>
+                <button class="btn btn-primary" id="exportOrdersCsvBtn"><i class="fas fa-file-csv"></i> Export Orders CSV</button>
+                <button class="btn btn-warning" id="exportOrdersPdfBtn"><i class="fas fa-file-pdf"></i> Export Orders PDF</button>
+                <button class="btn btn-secondary" id="downloadOrderHistoryBtn"><i class="fas fa-download"></i> Download All Orders</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Low Stock Alerts -->
+          <div class="admin-table-container mb-3">
+            <h3 style="padding: 20px 20px 0;">Low Stock Alerts</h3>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Type</th>
+                  <th>Current Stock</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="lowStockTable"></tbody>
+            </table>
+          </div>
+          
+          <!-- Recent Orders -->
+          <div class="admin-table-container mb-3">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 20px 0;">
+              <h3>Recent Orders</h3>
+              <button class="btn btn-outline" onclick="showTab('orders')"><i class="fas fa-eye"></i> View All</button>
+            </div>
+            
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Phone</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTable"></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Orders Tab -->
+        <div id="ordersTab" class="tab-content">
+          <div class="admin-table-container mb-3">
+            <div style="padding: 20px;">
+              <div class="bulk-actions">
+                <div class="select-all" onclick="toggleSelectAll()">
+                  <input type="checkbox" id="selectAllCheckbox">
+                  <label for="selectAllCheckbox">Select All</label>
+                </div>
+                <button class="btn btn-danger" id="deleteSelectedBtn" onclick="deleteSelectedOrders()">
+                  <i class="fas fa-trash"></i> Delete Selected
+                </button>
+                <button class="btn btn-secondary" id="refreshOrdersBtn">
+                  <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <select id="orderFilter" class="form-control" style="width: auto;" onchange="filterOrders()">
+                  <option value="all">All Orders</option>
+                  <option value="pending">Pending</option>
+                  <option value="processing">Processing</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+            
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th width="50"><input type="checkbox" id="masterCheckbox" onchange="toggleMasterCheckbox()"></th>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Phone</th>
+                  <th>Items</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrderTable"></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Products Tab -->
+        <div id="productsTab" class="tab-content">
+          <div class="admin-table-container mb-3">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 20px 0;">
+              <h3>Manage Products</h3>
+              <button class="btn btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+            </div>
+            
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Price (25kg)</th>
+                  <th>Stock</th>
+                  <th>Visible</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductTable"></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Product Form Modal -->
+        <div class="modal" id="productModal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Add/Edit Product</h3>
+              <button class="btn btn-secondary" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form id="productForm">
+                <div class="form-group">
+                  <label>Product Name *</label>
+                  <input type="text" class="form-control" id="modalProductName" required>
+                </div>
+                <div class="form-group">
+                  <label>Type *</label>
+                  <select class="form-control" id="modalProductType" required>
+                    <option value="Samba">Samba</option>
+                    <option value="Basmati">Basmati</option>
+                    <option value="Raw">Raw</option>
+                    <option value="Boiled">Boiled</option>
+                    <option value="Red">Red</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Price per 25kg (Rs.) *</label>
+                  <input type="number" class="form-control" id="modalProductPrice" required>
+                </div>
+                <div class="form-group">
+                  <label>Stock Quantity *</label>
+                  <input type="number" class="form-control" id="modalProductStock" required>
+                </div>
+                
+                <div class="form-group image-upload-container">
+                  <label>Product Image</label>
+                  <div>
+                    <input type="file" class="form-control" id="modalProductImage" accept="image/*" onchange="previewImage(event)">
+                    <label for="modalProductImage" class="upload-btn">
+                      <i class="fas fa-upload"></i> Choose Image
+                    </label>
+                  </div>
+                  <img id="modalProductImagePreview" class="image-preview" alt="Product Image Preview">
+                  <input type="hidden" id="modalProductImageData">
+                </div>
+                
+                <div class="form-group">
+                  <label>
+                    <input type="checkbox" id="modalProductVisible" checked> Visible to customers
+                  </label>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-outline" onclick="closeProductModal()">Cancel</button>
+              <button class="btn btn-secondary" id="saveChangesBtn"><i class="fas fa-save"></i> Save Changes</button>
+              <button class="btn btn-primary" id="saveProductBtn">Save Product</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Order Details Modal -->
+        <div class="modal order-details-modal" id="orderDetailsModal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Order Details - <span id="modalOrderId"></span></h3>
+              <button class="btn btn-secondary" onclick="closeOrderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="order-summary">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><strong>Customer Name:</strong></label>
+                    <p id="modalCustomerName"></p>
+                  </div>
+                  <div class="form-group">
+                    <label><strong>Phone Number:</strong></label>
+                    <p id="modalCustomerPhone"></p>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><strong>Delivery Address:</strong></label>
+                    <p id="modalDeliveryAddress"></p>
+                  </div>
+                  <div class="form-group">
+                    <label><strong>City:</strong></label>
+                    <p id="modalCity"></p>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><strong>Order Date:</strong></label>
+                    <p id="modalOrderDate"></p>
+                  </div>
+                  <div class="form-group">
+                    <label><strong>Order Status:</strong></label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <span id="modalOrderStatus" class="status-badge"></span>
+                      <select id="modalStatusUpdate" class="form-control" style="width: auto;">
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                      </select>
+                      <button class="btn btn-sm btn-primary" onclick="updateOrderStatus()">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="order-items">
+                <h4>Order Items</h4>
+                <div id="modalOrderItems"></div>
+              </div>
+              
+              <div class="order-total" style="text-align: right; margin-top: 20px;">
+                <h3>Total: <span id="modalOrderTotal"></span></h3>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-outline" onclick="closeOrderModal()">Close</button>
+              <button class="btn btn-success" id="contactCustomerBtn" onclick="contactCustomer()">
+                <i class="fas fa-phone"></i> Contact
+              </button>
+              <button class="btn btn-warning" onclick="downloadOrderAsText()">
+                <i class="fas fa-download"></i> Download
+              </button>
+              <button class="btn btn-danger" onclick="deleteOrder()">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+              <a id="whatsappCustomerBtn" class="btn btn-success" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Container -->
+  <div id="notificationContainer" style="position: fixed; top: 20px; right: 20px; z-index: 3000;"></div>
+
+  <script>
+    // ===== GLOBAL VARIABLES =====
+    const BUSINESS_PHONE = '+94720516946';
+    const BUSINESS_PHONE_DISPLAY = '+94 72 051 6946';
+    
+    let products = JSON.parse(localStorage.getItem('goodwinProducts')) || [
+      { id: 1, name: 'Samba Rice', type: 'Samba', price: 5500, stock: 20, visible: true, image: '' },
+      { id: 2, name: 'Raw Rice', type: 'Raw', price: 4800, stock: 15, visible: true, image: '' },
+      { id: 3, name: 'Boiled Rice', type: 'Boiled', price: 5000, stock: 10, visible: true, image: '' },
+      { id: 4, name: 'Basmati Rice', type: 'Basmati', price: 6500, stock: 25, visible: true, image: '' },
+      { id: 5, name: 'Red Rice', type: 'Red', price: 5200, stock: 8, visible: true, image: '' }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('goodwinCart')) || [];
+    let orders = JSON.parse(localStorage.getItem('goodwinOrders')) || [];
+    let isAdminLoggedIn = localStorage.getItem('goodwinAdminLoggedIn') === 'true';
+    let editingProductId = null;
+    let currentImageData = '';
+    let currentOrderId = null;
+    let selectedOrders = new Set();
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+      if (isAdminLoggedIn) {
+        showAdminDashboard();
+      } else {
+        showWebsite();
+      }
+
+      renderProducts();
+      updateCartBadge();
+      setupEventListeners();
+    });
+
+    // ===== EVENT LISTENERS SETUP =====
+    function setupEventListeners() {
+      // Mobile menu
+      document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        const nav = document.getElementById('navLinks');
+        nav.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(e) {
+        const nav = document.getElementById('navLinks');
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        
+        if (!nav.contains(e.target) && !menuBtn.contains(e.target) && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+        }
+      });
+
+      // Navigation links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const section = this.getAttribute('data-section');
+          if (section) showSection(section);
+          document.getElementById('navLinks').classList.remove('active');
+        });
+      });
+
+      // All other elements with data-section attributes (hero buttons, footer links, etc.)
+      document.querySelectorAll('[data-section]:not(.nav-link)').forEach(element => {
+        element.addEventListener('click', function(e) {
+          e.preventDefault();
+          const section = this.getAttribute('data-section');
+          if (section) showSection(section);
+          // Close mobile menu if it's open
+          document.getElementById('navLinks').classList.remove('active');
+        });
+      });
+
+      // Admin login button
+      document.getElementById('adminLoginBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        showAdminLogin();
+      });
+
+      // Back to website button
+      document.getElementById('backToWebsite').addEventListener('click', function(e) {
+        e.preventDefault();
+        showWebsite();
+      });
+
+      // Login form
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        adminLogin();
+      });
+
+      // Admin logout
+      document.getElementById('adminLogout').addEventListener('click', adminLogout);
+
+      // Setup admin button listeners when admin dashboard is shown
+      document.addEventListener('adminDashboardShown', setupAdminEventListeners);
+
+      // Tab buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tabId = this.getAttribute('data-tab');
+          showTab(tabId);
+        });
+      });
+
+      // Setup event delegation for admin buttons
+      setupAdminEventDelegation();
+    }
+
+    // ===== ADMIN EVENT DELEGATION =====
+    function setupAdminEventDelegation() {
+      // Use event delegation for admin container
+      document.getElementById('admin').addEventListener('click', function(e) {
+        // Add product button
+        if (e.target && e.target.id === 'addProductBtn') {
+          e.preventDefault();
+          openProductModal();
+        }
+        
+        // Save product button
+        if (e.target && e.target.id === 'saveProductBtn') {
+          e.preventDefault();
+          saveProduct();
+        }
+        
+        // Save changes button
+        if (e.target && e.target.id === 'saveChangesBtn') {
+          e.preventDefault();
+          saveProduct();
+        }
+        
+        // Export buttons
+        if (e.target && e.target.id === 'exportCsvBtn') {
+          e.preventDefault();
+          exportProductsToCSV();
+        }
+        
+        if (e.target && e.target.id === 'exportPdfBtn') {
+          e.preventDefault();
+          exportProductsToPDF();
+        }
+        
+        if (e.target && e.target.id === 'exportOrdersCsvBtn') {
+          e.preventDefault();
+          exportOrdersToCSV();
+        }
+        
+        if (e.target && e.target.id === 'exportOrdersPdfBtn') {
+          e.preventDefault();
+          exportOrdersToPDF();
+        }
+        
+        if (e.target && e.target.id === 'downloadOrderHistoryBtn') {
+          e.preventDefault();
+          downloadAllOrders();
+        }
+      });
+    }
+
+    // ===== ADMIN EVENT LISTENERS SETUP =====
+    function setupAdminEventListeners() {
+      // Refresh orders button
+      const refreshBtn = document.getElementById('refreshOrdersBtn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+          loadAdminData();
+          showNotification('Orders refreshed!', 'success');
+        });
+      }
+      
+      // Load admin data
+      loadAdminData();
+    }
+
+    // ===== WEBSITE FUNCTIONS =====
+    function showWebsite() {
+      document.getElementById('website').classList.remove('hidden');
+      document.getElementById('admin').classList.add('hidden');
+      showSection('home');
+    }
+
+    function showAdminLogin() {
+      document.getElementById('website').classList.add('hidden');
+      document.getElementById('admin').classList.remove('hidden');
+      document.getElementById('adminLogin').classList.remove('hidden');
+      document.getElementById('adminDashboard').classList.add('hidden');
+      document.getElementById('loginError').style.display = 'none';
+    }
+
+    function showAdminDashboard() {
+      document.getElementById('website').classList.add('hidden');
+      document.getElementById('admin').classList.remove('hidden');
+      document.getElementById('adminLogin').classList.add('hidden');
+      document.getElementById('adminDashboard').classList.remove('hidden');
+      
+      // Trigger event to setup admin listeners
+      const event = new Event('adminDashboardShown');
+      document.dispatchEvent(event);
+    }
+
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      const tab = document.getElementById(tabId + 'Tab');
+      if (tab) {
+        tab.classList.add('active');
+        const tabBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+        if (tabBtn) tabBtn.classList.add('active');
+      }
+
+      if (tabId === 'orders') {
+        loadOrdersTable();
+      } else if (tabId === 'products') {
+        loadProductsTable();
+      }
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.classList.add('active');
+        const navLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+        if (navLink) navLink.classList.add('active');
+      }
+
+      if (sectionId === 'products') {
+        renderProducts();
+      } else if (sectionId === 'cart') {
+        renderCart();
+      }
+    }
+
+    // ===== PRODUCT FUNCTIONS =====
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+
+      const visibleProducts = products.filter(p => p.visible);
+
+      if (visibleProducts.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <i class="fas fa-seedling" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
+            <h3>No Products Available</h3>
+            <p>Check back soon for our rice collection!</p>
+          </div>
+        `;
+        return;
+      }
+
+      visibleProducts.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card fade-in';
+
+        const sizes = [
+          { size: '5kg', price: Math.round(product.price * 0.2) },
+          { size: '10kg', price: Math.round(product.price * 0.4) },
+          { size: '25kg', price: product.price }
+        ];
+
+        const sizeHTML = sizes.map(s => 
+          `<div class="bag-size" data-size="${s.size}" data-price="${s.price}">${s.size}</div>`
+        ).join('');
+
+        let imageHTML = product.image ? 
+          `<img src="${product.image}" alt="${product.name}">` : 
+          `<i class="fas fa-seedling"></i>`;
+
+        card.innerHTML = `
+          <div class="product-image" style="background: ${getCategoryColor(product.type)};">
+            ${imageHTML}
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-meta">Type: ${product.type} | Stock: ${product.stock} bags</p>
+            <div class="bag-sizes">${sizeHTML}</div>
+            <div class="product-price">Rs.${product.price} / 25kg</div>
+            <button class="btn btn-primary" onclick="addToCart(${product.id})" ${product.stock <= 0 ? 'disabled' : ''}>
+              <i class="fas fa-cart-plus"></i> ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+
+        const sizeButtons = card.querySelectorAll('.bag-size');
+        sizeButtons.forEach(btn => {
+          btn.addEventListener('click', function() {
+            sizeButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const priceElement = card.querySelector('.product-price');
+            const size = this.getAttribute('data-size');
+            const price = this.getAttribute('data-price');
+            priceElement.textContent = `Rs.${price} / ${size}`;
+          });
+        });
+
+        if (sizeButtons.length > 0) {
+          sizeButtons[0].classList.add('active');
+          const size = sizeButtons[0].getAttribute('data-size');
+          const price = sizeButtons[0].getAttribute('data-price');
+          card.querySelector('.product-price').textContent = `Rs.${price} / ${size}`;
+        }
+      });
+    }
+
+    function getCategoryColor(type) {
+      const colors = {
+        'Samba': '#E8F5E9',
+        'Basmati': '#FFF8E1',
+        'Raw': '#E3F2FD',
+        'Boiled': '#F3E5F5',
+        'Red': '#FFEBEE'
+      };
+      return colors[type] || '#F5F5F5';
+    }
+
+    // ===== CART FUNCTIONS =====
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product || product.stock <= 0) {
+        showNotification('Product is out of stock!', 'error');
+        return;
+      }
+
+      const productCard = document.querySelector(`[onclick="addToCart(${productId})"]`).closest('.product-card');
+      const selectedSize = productCard?.querySelector('.bag-size.active');
+      
+      if (!selectedSize) {
+        showNotification('Please select a bag size first', 'warning');
+        return;
+      }
+
+      const size = selectedSize.getAttribute('data-size');
+      const price = parseInt(selectedSize.getAttribute('data-price'));
+
+      const existingItem = cart.find(item => item.productId === productId && item.size === size);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          productId,
+          name: product.name,
+          type: product.type,
+          size,
+          price,
+          quantity: 1
+        });
+      }
+
+      product.stock -= 1;
+
+      localStorage.setItem('goodwinProducts', JSON.stringify(products));
+      localStorage.setItem('goodwinCart', JSON.stringify(cart));
+
+      updateCartBadge();
+      renderProducts();
+      
+      if (document.getElementById('cart').classList.contains('active')) {
+        renderCart();
+      }
+
+      showNotification(`${product.name} (${size}) added to cart!`, 'success');
+    }
+
+    function renderCart() {
+      const cartContent = document.getElementById('cartContent');
+      if (!cartContent) return;
+
+      if (cart.length === 0) {
+        cartContent.innerHTML = `
+          <div class="cart-empty">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Your cart is empty</h3>
+            <p>Add some products to get started!</p>
+            <button class="btn btn-primary mt-2" onclick="showSection('products')">
+              <i class="fas fa-shopping-bag"></i> Browse Products
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let total = 0;
+      let itemsHTML = '';
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        itemsHTML += `
+          <div class="cart-item fade-in">
+            <div class="cart-item-info">
+              <h4>${item.name}</h4>
+              <div class="cart-item-details">${item.type} • ${item.size} • Rs.${item.price} per bag</div>
+            </div>
+            <div class="cart-item-quantity">
+              <button class="quantity-btn" onclick="updateCartQuantity(${index}, -1)">-</button>
+              <span style="font-weight: bold; min-width: 30px; text-align: center;">${item.quantity}</span>
+              <button class="quantity-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+            </div>
+            <div class="cart-item-price">Rs.${itemTotal}</div>
+            <button class="cart-item-remove" onclick="removeFromCart(${index})"><i class="fas fa-trash"></i></button>
+          </div>
+        `;
+      });
+
+      cartContent.innerHTML = `
+        <div class="cart-items">${itemsHTML}</div>
+        <div class="cart-total">
+          <span>Total Amount:</span>
+          <span>Rs.${total}</span>
+        </div>
+        
+        <div class="checkout-form">
+          <h3>Delivery Details</h3>
+          <form id="checkoutForm" onsubmit="placeOrder(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="customerName">Full Name <span class="required">*</span></label>
+                <input type="text" class="form-control" id="customerName" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="customerPhone">Phone Number <span class="required">*</span></label>
+                <input type="tel" class="form-control" id="customerPhone" placeholder="+94 XX XXX XXXX" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="deliveryAddress">Delivery Address <span class="required">*</span></label>
+              <textarea class="form-control" id="deliveryAddress" rows="3" placeholder="Enter complete delivery address" required></textarea>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City <span class="required">*</span></label>
+                <input type="text" class="form-control" id="city" placeholder="Colombo" required>
+              </div>
+              <div class="form-group">
+                <label for="deliveryNotes">Delivery Notes (Optional)</label>
+                <textarea class="form-control" id="deliveryNotes" rows="2" placeholder="Any special instructions for delivery"></textarea>
+              </div>
+            </div>
+            
+            <div class="cart-actions">
+              <button type="button" class="btn btn-outline" onclick="showSection('products')">
+                <i class="fas fa-arrow-left"></i> Continue Shopping
+              </button>
+              <button type="submit" class="btn btn-success">
+                <i class="fab fa-whatsapp"></i> Place Order via WhatsApp
+              </button>
+            </div>
+          </form>
+        </div>
+      `;
+    }
+
+    function updateCartQuantity(index, change) {
+      const item = cart[index];
+      const product = products.find(p => p.id === item.productId);
+
+      if (change > 0) {
+        if (product.stock <= 0) {
+          showNotification('Product out of stock!', 'error');
+          return;
+        }
+        item.quantity += 1;
+        product.stock -= 1;
+      } else {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+          product.stock += 1;
+        } else {
+          removeFromCart(index);
+          return;
+        }
+      }
+
+      localStorage.setItem('goodwinProducts', JSON.stringify(products));
+      localStorage.setItem('goodwinCart', JSON.stringify(cart));
+
+      updateCartBadge();
+      renderCart();
+      renderProducts();
+    }
+
+    function removeFromCart(index) {
+      const item = cart[index];
+      const product = products.find(p => p.id === item.productId);
+
+      product.stock += item.quantity;
+      cart.splice(index, 1);
+
+      localStorage.setItem('goodwinProducts', JSON.stringify(products));
+      localStorage.setItem('goodwinCart', JSON.stringify(cart));
+
+      updateCartBadge();
+      renderCart();
+      renderProducts();
+
+      showNotification('Item removed from cart', 'info');
+    }
+
+    function updateCartBadge() {
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartBadge').textContent = totalItems;
+    }
+
+    function placeOrder(event) {
+      event.preventDefault();
+      
+      if (cart.length === 0) {
+        showNotification('Your cart is empty!', 'error');
+        return;
+      }
+
+      const customerName = document.getElementById('customerName').value;
+      const customerPhone = document.getElementById('customerPhone').value;
+      const deliveryAddress = document.getElementById('deliveryAddress').value;
+      const city = document.getElementById('city').value;
+      const deliveryNotes = document.getElementById('deliveryNotes').value;
+
+      if (!customerName || !customerPhone || !deliveryAddress || !city) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
+      }
+
+      // Basic phone number validation for WhatsApp
+      const cleanPhone = customerPhone.replace(/\D/g, '');
+      if (cleanPhone.length < 10 || cleanPhone.length > 15) {
+        showNotification('Please enter a valid phone number', 'error');
+        return;
+      }
+
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const orderId = 'ORD' + Date.now().toString().slice(-6);
+      
+      const order = {
+        id: orderId,
+        customerName,
+        phone: customerPhone,
+        address: deliveryAddress,
+        city,
+        deliveryNotes,
+        items: [...cart],
+        total,
+        date: new Date().toISOString().split('T')[0],
+        status: 'pending'
+      };
+
+      orders.unshift(order);
+      localStorage.setItem('goodwinOrders', JSON.stringify(orders));
+
+      // FIXED: Properly encode the entire message and handle phone number formatting
+      let message = 'Goodwin Traders - Rice Order\n\n';
+      message += `Order ID: ${orderId}\n`;
+      message += `Customer: ${customerName}\n`;
+      message += `Phone: ${customerPhone}\n`;
+      message += `Address: ${deliveryAddress}, ${city}\n`;
+      message += `Date: ${order.date}\n\n`;
+      message += 'Order Details:\n\n';
+      
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        message += `${index + 1}. ${item.name} (${item.size}) x ${item.quantity} = Rs.${itemTotal}\n`;
+      });
+      
+      message += `\nTotal: Rs.${total}\n`;
+      
+      if (deliveryNotes) {
+        message += `\nDelivery Notes: ${deliveryNotes}\n`;
+      }
+      
+      message += '\nPlease confirm this order and provide delivery details.';
+
+      // FIXED: Properly encode the entire message and ensure phone number is clean
+      const encodedMessage = encodeURIComponent(message);
+      const businessPhoneClean = BUSINESS_PHONE.replace(/\D/g, ''); // Clean business phone number
+      const whatsappUrl = `https://wa.me/${businessPhoneClean}?text=${encodedMessage}`;
+      
+      // Try to open WhatsApp, fallback to web WhatsApp if mobile app fails
+      try {
+        window.open(whatsappUrl, '_blank');
+      } catch (error) {
+        // Fallback for some browsers
+        window.location.href = whatsappUrl;
+      }
+
+      cart = [];
+      localStorage.setItem('goodwinCart', JSON.stringify(cart));
+      updateCartBadge();
+      renderCart();
+
+      showNotification(`Order #${orderId} placed successfully!`, 'success');
+
+      if (isAdminLoggedIn) {
+        loadAdminData();
+      }
+    }
+
+    // ===== ADMIN FUNCTIONS =====
+    function adminLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === 'Jabeer' && password === 'Jabeer2026@@') {
+        isAdminLoggedIn = true;
+        localStorage.setItem('goodwinAdminLoggedIn', 'true');
+        showAdminDashboard();
+        showNotification('Admin login successful!', 'success');
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        showNotification('Invalid credentials!', 'error');
+      }
+    }
+
+    function adminLogout() {
+      isAdminLoggedIn = false;
+      localStorage.removeItem('goodwinAdminLoggedIn');
+      showAdminLogin();
+      showNotification('Logged out successfully', 'info');
+    }
+
+    function loadAdminData() {
+      document.getElementById('totalProducts').textContent = products.length;
+      
+      const totalSales = orders.reduce((sum, order) => sum + order.total, 0);
+      document.getElementById('totalSales').textContent = `Rs. ${totalSales}`;
+      
+      const pendingOrders = orders.filter(o => o.status === 'pending').length;
+      document.getElementById('pendingOrders').textContent = pendingOrders;
+      
+      document.getElementById('totalOrders').textContent = orders.length;
+
+      loadLowStockTable();
+      loadRecentOrders();
+      loadProductsTable();
+    }
+
+    function loadLowStockTable() {
+      const lowStockTable = document.getElementById('lowStockTable');
+      lowStockTable.innerHTML = '';
+      
+      const lowStockProducts = products.filter(p => p.stock <= 5);
+      if (lowStockProducts.length === 0) {
+        lowStockTable.innerHTML = `
+          <tr><td colspan="4" class="text-center">No low stock items</td></tr>
+        `;
+      } else {
+        lowStockProducts.forEach(product => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${product.name}</td>
+            <td>${product.type}</td>
+            <td>${product.stock}</td>
+            <td><span class="status-badge status-low">Low Stock</span></td>
+          `;
+          lowStockTable.appendChild(row);
+        });
+      }
+    }
+
+    function loadRecentOrders() {
+      const recentOrdersTable = document.getElementById('recentOrdersTable');
+      recentOrdersTable.innerHTML = '';
+      
+      const recentOrders = orders.slice(0, 5);
+      
+      if (recentOrders.length === 0) {
+        recentOrdersTable.innerHTML = `
+          <tr><td colspan="6" class="text-center">No orders yet</td></tr>
+        `;
+      } else {
+        recentOrders.forEach(order => {
+          const row = document.createElement('tr');
+          const statusClass = `status-${order.status}`;
+          const statusText = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+          
+          row.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.customerName}</td>
+            <td>${order.phone}</td>
+            <td>Rs.${order.total}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>${order.date}</td>
+          `;
+          recentOrdersTable.appendChild(row);
+        });
+      }
+    }
+
+    function loadOrdersTable() {
+      const adminOrderTable = document.getElementById('adminOrderTable');
+      if (!adminOrderTable) return;
+      
+      adminOrderTable.innerHTML = '';
+      selectedOrders.clear();
+      
+      const filter = document.getElementById('orderFilter')?.value || 'all';
+      let filteredOrders = orders;
+      
+      if (filter !== 'all') {
+        filteredOrders = orders.filter(o => o.status === filter);
+      }
+      
+      if (filteredOrders.length === 0) {
+        adminOrderTable.innerHTML = `
+          <tr><td colspan="9" class="text-center">No orders found</td></tr>
+        `;
+      } else {
+        filteredOrders.forEach(order => {
+          const row = document.createElement('tr');
+          const statusClass = `status-${order.status}`;
+          const statusText = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+          const itemCount = order.items.reduce((sum, item) => sum + item.quantity, 0);
+          
+          row.innerHTML = `
+            <td><input type="checkbox" class="order-checkbox" data-order-id="${order.id}" onchange="toggleOrderSelection('${order.id}')"></td>
+            <td><strong>${order.id}</strong></td>
+            <td>${order.customerName}</td>
+            <td>${order.phone}</td>
+            <td>${itemCount} items</td>
+            <td>Rs.${order.total}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>${order.date}</td>
+            <td class="action-buttons">
+              <button class="btn btn-sm btn-secondary" onclick="viewOrderDetails('${order.id}')">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn btn-sm btn-success" onclick="contactCustomer('${order.phone}')">
+                <i class="fas fa-phone"></i>
+              </button>
+              <button class="btn btn-sm btn-warning" onclick="downloadSingleOrder('${order.id}')">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" onclick="deleteSingleOrder('${order.id}')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          `;
+          adminOrderTable.appendChild(row);
+        });
+      }
+    }
+
+    function loadProductsTable() {
+      const adminProductTable = document.getElementById('adminProductTable');
+      if (!adminProductTable) return;
+      
+      adminProductTable.innerHTML = '';
+      
+      products.forEach(product => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            ${product.image ? 
+              `<img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">` : 
+              `<i class="fas fa-seedling" style="font-size: 1.5rem; color: #ccc;"></i>`
+            }
+          </td>
+          <td>${product.name}</td>
+          <td>${product.type}</td>
+          <td>Rs.${product.price}</td>
+          <td>${product.stock}</td>
+          <td>${product.visible ? 'Yes' : 'No'}</td>
+          <td class="action-buttons">
+            <button class="btn btn-sm btn-secondary" onclick="editProduct(${product.id})">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${product.id})">
+              <i class="fas fa-trash"></i>
+            </button>
+            <button class="btn btn-sm btn-outline" onclick="toggleProductVisibility(${product.id})">
+              <i class="fas fa-eye"></i>
+            </button>
+          </td>
+        `;
+        adminProductTable.appendChild(row);
+      });
+    }
+
+    // ===== ORDER SELECTION FUNCTIONS =====
+    function toggleOrderSelection(orderId) {
+      if (selectedOrders.has(orderId)) {
+        selectedOrders.delete(orderId);
+      } else {
+        selectedOrders.add(orderId);
+      }
+      updateSelectedCount();
+    }
+
+    function toggleMasterCheckbox() {
+      const masterCheckbox = document.getElementById('masterCheckbox');
+      const checkboxes = document.querySelectorAll('.order-checkbox');
+      
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = masterCheckbox.checked;
+        const orderId = checkbox.getAttribute('data-order-id');
+        if (masterCheckbox.checked) {
+          selectedOrders.add(orderId);
+        } else {
+          selectedOrders.delete(orderId);
+        }
+      });
+      updateSelectedCount();
+    }
+
+    function toggleSelectAll() {
+      const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+      const masterCheckbox = document.getElementById('masterCheckbox');
+      
+      masterCheckbox.checked = selectAllCheckbox.checked;
+      toggleMasterCheckbox();
+    }
+
+    function updateSelectedCount() {
+      const selectedCount = selectedOrders.size;
+      const deleteBtn = document.getElementById('deleteSelectedBtn');
+      
+      if (selectedCount > 0) {
+        deleteBtn.textContent = `Delete (${selectedCount})`;
+        deleteBtn.disabled = false;
+      } else {
+        deleteBtn.textContent = 'Delete Selected';
+        deleteBtn.disabled = true;
+      }
+    }
+
+    function deleteSelectedOrders() {
+      if (selectedOrders.size === 0) {
+        showNotification('No orders selected for deletion', 'warning');
+        return;
+      }
+
+      if (!confirm(`Are you sure you want to delete ${selectedOrders.size} order(s)? This action cannot be undone.`)) {
+        return;
+      }
+
+      const ordersToDelete = Array.from(selectedOrders);
+      orders = orders.filter(order => !ordersToDelete.includes(order.id));
+      
+      localStorage.setItem('goodwinOrders', JSON.stringify(orders));
+      selectedOrders.clear();
+      
+      loadAdminData();
+      loadOrdersTable();
+      showNotification(`${ordersToDelete.length} order(s) deleted successfully!`, 'success');
+    }
+
+    function deleteSingleOrder(orderId) {
+      if (!confirm('Are you sure you want to delete this order? This action cannot be undone.')) {
+        return;
+      }
+
+      const orderIndex = orders.findIndex(o => o.id === orderId);
+      if (orderIndex !== -1) {
+        orders.splice(orderIndex, 1);
+        localStorage.setItem('goodwinOrders', JSON.stringify(orders));
+        
+        loadAdminData();
+        loadOrdersTable();
+        showNotification('Order deleted successfully!', 'success');
+        
+        if (currentOrderId === orderId) {
+          closeOrderModal();
+        }
+      }
+    }
+
+    // ===== IMAGE UPLOAD FUNCTIONS =====
+    function previewImage(event) {
+      const input = event.target;
+      const preview = document.getElementById('modalProductImagePreview');
+      const imageDataInput = document.getElementById('modalProductImageData');
+      
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          currentImageData = e.target.result;
+          imageDataInput.value = e.target.result;
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // ===== PRODUCT MODAL FUNCTIONS =====
+    function openProductModal(productId = null) {
+      editingProductId = productId;
+      const modal = document.getElementById('productModal');
+      const preview = document.getElementById('modalProductImagePreview');
+      const saveBtn = document.getElementById('saveProductBtn');
+      const saveChangesBtn = document.getElementById('saveChangesBtn');
+
+      if (!productId) {
+        modal.querySelector('h3').textContent = 'Add New Product';
+        document.getElementById('productForm').reset();
+        document.getElementById('modalProductVisible').checked = true;
+        preview.style.display = 'none';
+        currentImageData = '';
+        saveBtn.style.display = 'block';
+        saveChangesBtn.style.display = 'none';
+      } else {
+        modal.querySelector('h3').textContent = 'Edit Product';
+        const product = products.find(p => p.id === productId);
+        document.getElementById('modalProductName').value = product.name;
+        document.getElementById('modalProductType').value = product.type;
+        document.getElementById('modalProductPrice').value = product.price;
+        document.getElementById('modalProductStock').value = product.stock;
+        document.getElementById('modalProductVisible').checked = product.visible;
+        
+        if (product.image) {
+          preview.src = product.image;
+          preview.style.display = 'block';
+          currentImageData = product.image;
+        } else {
+          preview.style.display = 'none';
+          currentImageData = '';
+        }
+        
+        saveBtn.style.display = 'none';
+        saveChangesBtn.style.display = 'block';
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').style.display = 'none';
+      editingProductId = null;
+      currentImageData = '';
+    }
+
+    function saveProduct() {
+      const name = document.getElementById('modalProductName').value.trim();
+      const type = document.getElementById('modalProductType').value;
+      const price = parseInt(document.getElementById('modalProductPrice').value);
+      const stock = parseInt(document.getElementById('modalProductStock').value);
+      const visible = document.getElementById('modalProductVisible').checked;
+      const image = currentImageData;
+
+      if (!name || !type || !price || !stock) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
+      }
+
+      if (price <= 0) {
+        showNotification('Price must be greater than 0', 'error');
+        return;
+      }
+
+      if (stock < 0) {
+        showNotification('Stock cannot be negative', 'error');
+        return;
+      }
+
+      if (!editingProductId) {
+        const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        products.push({ id: newId, name, type, price, stock, visible, image });
+        showNotification('Product added successfully!', 'success');
+      } else {
+        const index = products.findIndex(p => p.id === editingProductId);
+        if (index !== -1) {
+          products[index] = { ...products[index], name, type, price, stock, visible, image };
+          showNotification('Product updated successfully!', 'success');
+        }
+      }
+
+      localStorage.setItem('goodwinProducts', JSON.stringify(products));
+      closeProductModal();
+      loadAdminData();
+      renderProducts();
+    }
+
+    function editProduct(productId) {
+      openProductModal(productId);
+    }
+
+    function deleteProduct(productId) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        const index = products.findIndex(p => p.id === productId);
+        if (index !== -1) {
+          products.splice(index, 1);
+          localStorage.setItem('goodwinProducts', JSON.stringify(products));
+          loadAdminData();
+          renderProducts();
+          showNotification('Product deleted successfully!', 'success');
+        }
+      }
+    }
+
+    function toggleProductVisibility(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        product.visible = !product.visible;
+        localStorage.setItem('goodwinProducts', JSON.stringify(products));
+        loadAdminData();
+        renderProducts();
+        showNotification(`Product ${product.visible ? 'activated' : 'deactivated'}!`, 'success');
+      }
+    }
+
+    // ===== ORDER MANAGEMENT FUNCTIONS =====
+    function filterOrders() {
+      loadOrdersTable();
+    }
+
+    function viewOrderDetails(orderId) {
+      currentOrderId = orderId;
+      const order = orders.find(o => o.id === orderId);
+      
+      if (!order) {
+        showNotification('Order not found!', 'error');
+        return;
+      }
+      
+      document.getElementById('modalOrderId').textContent = orderId;
+      document.getElementById('modalCustomerName').textContent = order.customerName;
+      document.getElementById('modalCustomerPhone').textContent = order.phone;
+      document.getElementById('modalDeliveryAddress').textContent = order.address;
+      document.getElementById('modalCity').textContent = order.city;
+      document.getElementById('modalOrderDate').textContent = order.date;
+      document.getElementById('modalOrderTotal').textContent = `Rs.${order.total}`;
+      
+      const statusElement = document.getElementById('modalOrderStatus');
+      const statusClass = `status-${order.status}`;
+      const statusText = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+      statusElement.className = `status-badge ${statusClass}`;
+      statusElement.textContent = statusText;
+      
+      document.getElementById('modalStatusUpdate').value = order.status;
+      
+      const whatsappBtn = document.getElementById('whatsappCustomerBtn');
+      // FIXED: Use encodeURIComponent for WhatsApp message and clean phone number
+      const whatsappMessage = `Hello ${order.customerName}, this is Goodwin Traders regarding your order ${orderId}.`;
+      const cleanPhone = order.phone.replace(/\D/g, ''); // Remove any non-digit characters
+      whatsappBtn.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      const orderItemsContainer = document.getElementById('modalOrderItems');
+      orderItemsContainer.innerHTML = '';
+      
+      order.items.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'order-item';
+        itemElement.innerHTML = `
+          <div>
+            <strong>${item.name}</strong><br>
+            <small>${item.type} • ${item.size}</small>
+          </div>
+          <div style="text-align: right;">
+            <div>${item.quantity} x Rs.${item.price}</div>
+            <strong>Rs.${item.quantity * item.price}</strong>
+          </div>
+        `;
+        orderItemsContainer.appendChild(itemElement);
+      });
+      
+      document.getElementById('orderDetailsModal').style.display = 'flex';
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderDetailsModal').style.display = 'none';
+      currentOrderId = null;
+    }
+
+    function updateOrderStatus() {
+      if (!currentOrderId) return;
+      
+      const newStatus = document.getElementById('modalStatusUpdate').value;
+      const orderIndex = orders.findIndex(o => o.id === currentOrderId);
+      
+      if (orderIndex !== -1) {
+        orders[orderIndex].status = newStatus;
+        localStorage.setItem('goodwinOrders', JSON.stringify(orders));
+        
+        const statusElement = document.getElementById('modalOrderStatus');
+        const statusClass = `status-${newStatus}`;
+        const statusText = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+        statusElement.className = `status-badge ${statusClass}`;
+        statusElement.textContent = statusText;
+        
+        loadOrdersTable();
+        loadRecentOrders();
+        showNotification(`Order status updated to ${statusText}`, 'success');
+      }
+    }
+
+    function contactCustomer(phone) {
+      if (phone) {
+        window.location.href = `tel:${phone}`;
+      } else {
+        const order = orders.find(o => o.id === currentOrderId);
+        if (order && order.phone) {
+          window.location.href = `tel:${order.phone}`;
+        }
+      }
+    }
+
+    function deleteOrder() {
+      if (!currentOrderId) return;
+      deleteSingleOrder(currentOrderId);
+    }
+
+    // ===== DOWNLOAD FUNCTIONS =====
+    function downloadSingleOrder(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (!order) {
+        showNotification('Order not found!', 'error');
+        return;
+      }
+
+      let content = `Goodwin Traders & Transport\n`;
+      content += `Order Receipt\n`;
+      content += `================================\n\n`;
+      content += `Order ID: ${order.id}\n`;
+      content += `Date: ${order.date}\n`;
+      content += `Customer: ${order.customerName}\n`;
+      content += `Phone: ${order.phone}\n`;
+      content += `Address: ${order.address}, ${order.city}\n`;
+      content += `Status: ${order.status.toUpperCase()}\n\n`;
+      
+      content += `Order Items:\n`;
+      content += `--------------------------------\n`;
+      order.items.forEach((item, index) => {
+        content += `${index + 1}. ${item.name} (${item.type})\n`;
+        content += `   Size: ${item.size}\n`;
+        content += `   Quantity: ${item.quantity}\n`;
+        content += `   Price: Rs.${item.price}\n`;
+        content += `   Subtotal: Rs.${item.quantity * item.price}\n\n`;
+      });
+      
+      content += `--------------------------------\n`;
+      content += `Total Amount: Rs.${order.total}\n\n`;
+      
+      if (order.deliveryNotes) {
+        content += `Delivery Notes: ${order.deliveryNotes}\n`;
+      }
+      
+      content += `\nThank you for your order!\n`;
+      content += `Goodwin Traders & Transport\n`;
+      content += `Contact: ${BUSINESS_PHONE_DISPLAY}\n`;
+
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `order_${order.id}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+      showNotification(`Order ${order.id} downloaded!`, 'success');
+    }
+
+    function downloadAllOrders() {
+      if (orders.length === 0) {
+        showNotification('No orders to download', 'warning');
+        return;
+      }
+
+      let content = `Goodwin Traders & Transport\n`;
+      content += `Complete Order History\n`;
+      content += `Generated: ${new Date().toLocaleString()}\n`;
+      content += `========================================\n\n`;
+      
+      orders.forEach((order, orderIndex) => {
+        content += `Order ${orderIndex + 1} of ${orders.length}\n`;
+        content += `----------------------------------------\n`;
+        content += `Order ID: ${order.id}\n`;
+        content += `Date: ${order.date}\n`;
+        content += `Customer: ${order.customerName}\n`;
+        content += `Phone: ${order.phone}\n`;
+        content += `Address: ${order.address}, ${order.city}\n`;
+        content += `Status: ${order.status.toUpperCase()}\n`;
+        content += `Total: Rs.${order.total}\n`;
+        
+        content += `Items: ${order.items.length} products\n`;
+        order.items.forEach((item, itemIndex) => {
+          content += `  ${itemIndex + 1}. ${item.name} (${item.type}) - ${item.quantity}x${item.size} = Rs.${item.quantity * item.price}\n`;
+        });
+        
+        if (order.deliveryNotes) {
+          content += `Notes: ${order.deliveryNotes}\n`;
+        }
+        
+        content += `\n\n`;
+      });
+      
+      content += `========================================\n`;
+      content += `Total Orders: ${orders.length}\n`;
+      content += `Total Revenue: Rs.${orders.reduce((sum, order) => sum + order.total, 0)}\n`;
+      content += `\nEnd of Report\n`;
+
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `goodwin_orders_complete_${new Date().toISOString().slice(0,10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+      showNotification(`All orders downloaded (${orders.length})!`, 'success');
+    }
+
+    function downloadOrderAsText() {
+      if (!currentOrderId) return;
+      downloadSingleOrder(currentOrderId);
+    }
+
+    // ===== EXPORT FUNCTIONS =====
+    function exportProductsToCSV() {
+      const headers = ['ID', 'Name', 'Type', 'Price (Rs.)', 'Stock', 'Visible', 'Image'];
+      const data = products.map(p => [
+        p.id,
+        p.name,
+        p.type,
+        p.price,
+        p.stock,
+        p.visible ? 'Yes' : 'No',
+        p.image ? 'Yes' : 'No'
+      ]);
+
+      const csvContent = [
+        headers.join(','),
+        ...data.map(row => row.join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `goodwin_products_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+      showNotification('Products exported as CSV!', 'success');
+    }
+
+    function exportProductsToPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      doc.setFontSize(20);
+      doc.text('Goodwin Traders - Products Report', 14, 22);
+      doc.setFontSize(10);
+      doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 30);
+      
+      const tableData = products.map(p => [
+        p.id,
+        p.name,
+        p.type,
+        `Rs. ${p.price}`,
+        p.stock,
+        p.visible ? 'Yes' : 'No'
+      ]);
+
+      doc.autoTable({
+        head: [['ID', 'Name', 'Type', 'Price', 'Stock', 'Visible']],
+        body: tableData,
+        startY: 40,
+        theme: 'grid',
+        headStyles: { fillColor: [46, 125, 50] },
+        styles: { fontSize: 9 }
+      });
+
+      const pageCount = doc.internal.getNumberOfPages();
+      for(let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8);
+        doc.text(
+          `Page ${i} of ${pageCount}`,
+          doc.internal.pageSize.getWidth() / 2,
+          doc.internal.pageSize.getHeight() - 10,
+          { align: 'center' }
+        );
+      }
+
+      doc.save(`goodwin_products_${new Date().toISOString().slice(0,10)}.pdf`);
+      showNotification('Products exported as PDF!', 'success');
+    }
+
+    function exportOrdersToCSV() {
+      const headers = ['Order ID', 'Date', 'Customer', 'Phone', 'Address', 'City', 'Items', 'Total (Rs.)', 'Status'];
+      const data = orders.map(o => [
+        o.id,
+        o.date,
+        o.customerName,
+        o.phone,
+        o.address,
+        o.city,
+        o.items.reduce((sum, item) => sum + item.quantity, 0),
+        o.total,
+        o.status.charAt(0).toUpperCase() + o.status.slice(1)
+      ]);
+
+      const csvContent = [
+        headers.join(','),
+        ...data.map(row => row.join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `goodwin_orders_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+      showNotification('Orders exported as CSV!', 'success');
+    }
+
+    function exportOrdersToPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      doc.setFontSize(20);
+      doc.text('Goodwin Traders - Orders Report', 14, 22);
+      doc.setFontSize(10);
+      doc.text(`Generated: ${new Date().toLocaleDateString()} | Total Orders: ${orders.length}`, 14, 30);
+      
+      const tableData = orders.map(o => [
+        o.id,
+        o.date,
+        o.customerName,
+        o.phone,
+        o.address.substring(0, 30) + (o.address.length > 30 ? '...' : ''),
+        o.city,
+        `Rs. ${o.total}`,
+        o.status.charAt(0).toUpperCase() + o.status.slice(1)
+      ]);
+
+      doc.autoTable({
+        head: [['Order ID', 'Date', 'Customer', 'Phone', 'Address', 'City', 'Total', 'Status']],
+        body: tableData,
+        startY: 40,
+        theme: 'grid',
+        headStyles: { fillColor: [46, 125, 50] },
+        styles: { fontSize: 8 },
+        columnStyles: {
+          0: { cellWidth: 25 },
+          1: { cellWidth: 20 },
+          2: { cellWidth: 25 },
+          3: { cellWidth: 25 },
+          4: { cellWidth: 35 },
+          5: { cellWidth: 20 },
+          6: { cellWidth: 20 },
+          7: { cellWidth: 20 }
+        }
+      });
+
+      const pageCount = doc.internal.getNumberOfPages();
+      for(let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8);
+        doc.text(
+          `Page ${i} of ${pageCount}`,
+          doc.internal.pageSize.getWidth() / 2,
+          doc.internal.pageSize.getHeight() - 10,
+          { align: 'center' }
+        );
+      }
+
+      doc.save(`goodwin_orders_${new Date().toISOString().slice(0,10)}.pdf`);
+      showNotification('Orders exported as PDF!', 'success');
+    }
+
+    // ===== UTILITY FUNCTIONS =====
+    function showNotification(message, type = 'info') {
+      const container = document.getElementById('notificationContainer');
+      const notification = document.createElement('div');
+      notification.className = 'fade-in';
+      
+      const bgColor = type === 'success' ? '#D4EDDA' : 
+                     type === 'error' ? '#F8D7DA' : 
+                     type === 'warning' ? '#FFF3CD' : '#D1ECF1';
+      const textColor = type === 'success' ? '#155724' : 
+                       type === 'error' ? '#721C24' : 
+                       type === 'warning' ? '#856404' : '#0C5460';
+      const borderColor = type === 'success' ? '#28A745' : 
+                         type === 'error' ? '#DC3545' : 
+                         type === 'warning' ? '#FFC107' : '#17A2B8';
+      const icon = type === 'success' ? 'fa-check-circle' : 
+                   type === 'error' ? 'fa-exclamation-circle' : 
+                   type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+      
+      notification.style.cssText = `
+        background: ${bgColor};
+        color: ${textColor};
+        padding: 15px 20px;
+        border-radius: var(--radius);
+        margin-bottom: 10px;
+        box-shadow: var(--shadow);
+        border-left: 4px solid ${borderColor};
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 300px;
+        max-width: 400px;
+      `;
+      
+      notification.innerHTML = `<i class="fas ${icon}" style="font-size: 1.2rem;"></i><span>${message}</span>`;
+      container.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(20px)';
+        setTimeout(() => container.removeChild(notification), 300);
+      }, 5000);
+    }
+
+    // ===== GLOBAL FUNCTIONS =====
+    window.addToCart = addToCart;
+    window.updateCartQuantity = updateCartQuantity;
+    window.removeFromCart = removeFromCart;
+    window.placeOrder = placeOrder;
+    window.showSection = showSection;
+    window.editProduct = editProduct;
+    window.deleteProduct = deleteProduct;
+    window.deleteSingleOrder = deleteSingleOrder;
+    window.downloadSingleOrder = downloadSingleOrder;
+    window.toggleProductVisibility = toggleProductVisibility;
+    window.closeProductModal = closeProductModal;
+    window.saveProduct = saveProduct;
+    window.previewImage = previewImage;
+    window.showTab = showTab;
+    window.filterOrders = filterOrders;
+    window.viewOrderDetails = viewOrderDetails;
+    window.closeOrderModal = closeOrderModal;
+    window.updateOrderStatus = updateOrderStatus;
+    window.contactCustomer = contactCustomer;
+    window.downloadOrderAsText = downloadOrderAsText;
+    window.deleteOrder = deleteOrder;
+    window.toggleOrderSelection = toggleOrderSelection;
+    window.toggleMasterCheckbox = toggleMasterCheckbox;
+    window.toggleSelectAll = toggleSelectAll;
+    window.deleteSelectedOrders = deleteSelectedOrders;
+  </script>
+</body>
+</html>
