@@ -1704,8 +1704,8 @@
 
   <script>
     // ===== GLOBAL VARIABLES =====
-    const BUSINESS_PHONE = '+94720516946';
-    const BUSINESS_PHONE_DISPLAY = '+94 72 051 6946';
+    const BUSINESS_PHONE = '+94769187574';
+    const BUSINESS_PHONE_DISPLAY = '+94 76 918 7574';
     
     let products = JSON.parse(localStorage.getItem('goodwinProducts')) || [
       { id: 1, name: 'Samba Rice', type: 'Samba', price: 5500, stock: 20, visible: true, image: '' },
@@ -1863,6 +1863,8 @@
 
     // ===== ADMIN EVENT LISTENERS SETUP =====
     function setupAdminEventListeners() {
+      // Setup admin event delegation for buttons
+      setupAdminEventDelegation();
       // Refresh orders button
       const refreshBtn = document.getElementById('refreshOrdersBtn');
       if (refreshBtn) {
@@ -1896,6 +1898,9 @@
       document.getElementById('admin').classList.remove('hidden');
       document.getElementById('adminLogin').classList.add('hidden');
       document.getElementById('adminDashboard').classList.remove('hidden');
+      
+      // Load admin data
+      loadAdminData();
       
       // Trigger event to setup admin listeners
       const event = new Event('adminDashboardShown');
