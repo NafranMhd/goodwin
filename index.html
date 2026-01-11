@@ -253,6 +253,58 @@
             color: var(--white);
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--primary-dark);
+                flex-direction: column;
+                gap: 0;
+                transition: 0.3s;
+                padding-top: 20px;
+                z-index: 999;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
         }
 
         .hero {
@@ -1357,6 +1409,48 @@
             .notification {
                 max-width: 90vw;
                 font-size: 0.9rem;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            /* Responsive Tables */
+            .admin-table-container {
+                overflow-x: auto;
+            }
+
+            .admin-table {
+                min-width: 600px;
+                /* Force table width to trigger scroll */
+            }
+
+            /* Modal Adjustments */
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .modal-header,
+            .modal-footer {
+                padding: 15px;
+                flex-wrap: wrap;
+            }
+
+            .modal-footer {
+                justify-content: center;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+                margin-bottom: 5px;
             }
         }
 
